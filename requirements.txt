@@ -1,0 +1,6 @@
+fastapi[standard]==0.112.2
+uvicorn==0.30.6
+sqlalchemy==1.4.53
+pydantic==2.8.2
+rapidfuzz==3.9.7
+# sqlite-database==3.0.1
