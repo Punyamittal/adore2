@@ -276,3 +276,4 @@ Original template: [github.com/achalagarwal/storewise-backend-assignment](https:
 See `LICENSE` in this repository for license text.
 
 Good luck with the assignment.
+# adore2-assignment
