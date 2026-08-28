@@ -1,3 +1,14 @@
+![Project Banner](docs/readme-agent/banner.svg)
+
+# Adore2
+
+This project is a small **FastAPI** service backed by **SQLite** (via **SQLAlchemy**) for managing hierarchical tasks. It is meant to assess Python skills through **Level 1** (easier to moderate) and **Level 2** (moderate to hard) coding tasks.
+
+## Technology Stack
+
+- Python
+- pip
+
 # adore2 — Task Manager Backend Assignment
 
 This project is a small **FastAPI** service backed by **SQLite** (via **SQLAlchemy**) for managing hierarchical tasks. It is meant to assess Python skills through **Level 1** (easier to moderate) and **Level 2** (moderate to hard) coding tasks.
@@ -277,3 +288,113 @@ See `LICENSE` in this repository for license text.
 
 Good luck with the assignment.
 # adore2-assignment
+
+## Setup Guide
+
+### Backend Setup
+
+```bash
+
+python -m venv .venv
+# Windows: .venv\Scripts\activate
+# Linux/macOS: source .venv/bin/activate
+pip install -r requirements.txt
+```
+
+### Running the Application
+
+1. **Install Python dependencies**
+
+```bash
+pip install -r requirements.txt
+
+```
+
+## System Architecture
+
+High-level system design, data flows, API map, and workflow pipelines derived from the repository structure.
+
+### System Architecture
+
+```mermaid
+graph TB
+    subgraph Client["Client Layer"]
+        user["User / Operator"]
+        api_client["API / CLI Client"]
+    end
+
+    subgraph Core["app/ — Application Core"]
+        main["main.py"]
+        models["models.py"]
+        task_logic["task_logic.py"]
+    end
+
+    subgraph Data["Data & Artifacts"]
+        datasets["Datasets · JSON · CSV"]
+    end
+
+    subgraph Charts["Metrics & Dashboard Charts"]
+        risk_trajectory["Risk trajectory chart"]
+        attack_stats["Attack detection stats"]
+        eval_metrics["Evaluation metrics"]
+        benchmark_p99["Benchmark p99 chart"]
+    end
+
+    user --> api_client
+    api_client --> main
+    main --> models --> task_logic
+    task_logic --> risk_trajectory
+    risk_trajectory --> user
+```
+
+### Data Flow & Charts Pipeline
+
+```mermaid
+flowchart LR
+    U["User / Event"] --> IN["Untrusted Input"]
+
+    subgraph Pipeline["Processing Pipeline"]
+        p0["Main"]
+        p1["Models"]
+        p2["Task Logic"]
+        p0 --> p1
+        p1 --> p2
+    end
+
+    subgraph Metrics["Metrics & Chart Feeds"]
+        risk_trajectory["Risk trajectory chart"]
+        attack_stats["Attack detection stats"]
+        eval_metrics["Evaluation metrics"]
+        benchmark_p99["Benchmark p99 chart"]
+    end
+
+    IN --> p0
+    p2 --> OUT["Authorized Output"]
+    OUT --> U
+    p2 --> risk_trajectory
+    risk_trajectory --> U
+```
+
+### Component & API Map
+
+```mermaid
+graph LR
+    subgraph App["app Components"]
+        main["main<br/>Main"]
+        models["models<br/>Models"]
+        task_logic["task_logic<br/>Task Logic"]
+    end
+    main --> models
+    models --> task_logic
+```
+
+### Application Page Map
+
+```mermaid
+mindmap
+  root((adore2))
+    Core
+      main
+      models
+      task_logic
+```
